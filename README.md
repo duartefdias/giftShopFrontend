@@ -1,4 +1,4 @@
-# my-app
+# That weird gift shop - Frontend
 
 ## Project setup
 ```
