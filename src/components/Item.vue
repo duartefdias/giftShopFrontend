@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-card hover="true">
+        <v-card hover>
 
             <v-img
             class="white--text align-end"

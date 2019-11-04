@@ -1,11 +1,13 @@
 <template>
-    <v-row justify="center">
-        <v-col cols="12" sm="6" md="8">
+    <v-row justify="center" align="center">
+        <v-col cols="12" sm="8" md="10">
             <v-text-field
-                full-width
                 label="Solo"
                 solo
                 placeholder="Search item..."
+                v-model="singleSearchString"
+                @input="updateStore()"
+                v-on:keyup.enter="simpleSearch()"
              ></v-text-field>
         </v-col>
     </v-row>
@@ -16,6 +18,26 @@
         name: 'Searchbar',
         components: {
             
+        },
+        data() {
+            return {
+                singleSearchString: ''
+            }
+        },
+        methods: {
+            simpleSearch() {
+                console.log('Search!')
+            },
+            updateStore() {
+                this.$store.state.singleSearch = this.singleSearchString
+                console.log(this.$store.state.singleSearch)
+            },
+            getSimpleSearchString() {
+                this.singleSearchString = this.$store.state.singleSearch
+            }
+        },
+        created() {
+            this.getSimpleSearchString()
         }
     }
 </script>
