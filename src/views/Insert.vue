@@ -106,7 +106,7 @@ export default {
   methods: {
       async submit() {
           const response = await api().post('/items/insert', this.newAsset)
-          console.log(response)
+          //console.log(response)
       }
   }
 }

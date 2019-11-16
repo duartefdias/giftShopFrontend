@@ -62,11 +62,11 @@
         },
         methods: {
             advancedSearch() {
-                console.log('Advanced search!')
+                //console.log('Advanced search!')
             },
             updateStore() {
                 this.$store.state.advancedSearch = this.advancedSearchParams
-                console.log(this.$store.state.advancedSearch)
+                //console.log(this.$store.state.advancedSearch)
             },
             getAdvancedSearchParams() {
                 this.advancedSearchParams = this.$store.state.advancedSearch

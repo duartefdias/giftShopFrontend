@@ -41,7 +41,7 @@ import api from '@/api'
                 await api().put('/items/incrementClicks', { _id: this.item._id})
                 // window.location.href = this.item.affiliateLink
                 window.open(this.item.affiliateLink)
-                console.log('Item clicked')
+                //console.log('Item clicked')
             }
         }
     }

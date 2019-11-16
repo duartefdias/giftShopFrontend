@@ -8,7 +8,7 @@ export default () => {
     myAxios = axios.create({
         baseURL: 'http://localhost:3000'
     })
-    console.log('Backend URL: ' + 'localhost:3000')
+    //console.log('Backend URL: ' + 'localhost:3000')
     myAxios.interceptors.response.use(
         function(response) { return response;}, 
         function(error) {

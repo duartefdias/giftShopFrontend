@@ -26,11 +26,11 @@
         },
         methods: {
             simpleSearch() {
-                console.log('Search!')
+                //console.log('Search!')
             },
             updateStore() {
                 this.$store.state.singleSearch = this.singleSearchString
-                console.log(this.$store.state.singleSearch)
+                //console.log(this.$store.state.singleSearch)
             },
             getSimpleSearchString() {
                 this.singleSearchString = this.$store.state.singleSearch
