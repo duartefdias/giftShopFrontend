@@ -6,7 +6,8 @@ export default () => {
     var myAxios
 
     myAxios = axios.create({
-        baseURL: 'http://localhost:3000'
+        //baseURL: 'http://localhost:3000'
+        baseURL: 'https://thatweirgiftbackend.azurewebsites.net:3000'
     })
     //console.log('Backend URL: ' + 'localhost:3000')
     myAxios.interceptors.response.use(
