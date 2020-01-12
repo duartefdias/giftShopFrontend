@@ -30,6 +30,11 @@
                         title: 'Insert',
                         path: '/insert',
                         index: 2
+                    },
+                    {
+                        title: 'Login',
+                        path: '/login',
+                        index: 3
                     }
                 ],
                 currentMenuOnDisplay: 1
