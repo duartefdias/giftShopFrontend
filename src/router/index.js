@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import Insert from '@/views/Insert'
+import Login from '@/views/Login'
 
 Vue.use(VueRouter)
 
@@ -28,7 +30,15 @@ const routes = [
   {
     path: '/insert',
     name: 'insert',
-    component: Insert
+    component: Insert,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 
@@ -37,5 +47,25 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLoggedIn) {
+      // Redirect to the Login Page
+      next('/login');
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    if (store.getters.isLoggedIn) {
+      // Redirect to the Login Page
+      next('/profile');
+    } else {
+      next();
+    }
+  } else {
+    next()
+  }
+});
 
 export default router
