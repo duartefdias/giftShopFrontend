@@ -41,7 +41,7 @@ const actions = {
             }
             return res;
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             commit('auth_error', err);
         }
     },
