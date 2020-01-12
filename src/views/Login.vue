@@ -32,6 +32,9 @@
                     required
                     ></v-text-field>
 
+                    <span style="color: red" v-if="loginError">Invalid credentials</span>
+                    <br>
+
                     <v-btn
                     :disabled="!valid"
                     color="info"
@@ -58,6 +61,7 @@ export default {
   },
   data() {
       return {
+        loginError: false,
         valid: true,
         username: '',
         usernameRules: [
@@ -79,15 +83,17 @@ export default {
           this.login(user)
           .then(res => {
               if(res.data.success) {
+                  this.loginError = false
                   this.$router.push("/")
               }
           })
-          .catch(err => {
-              console.log(err)
+          .catch(() => {
+              //console.log(err)
+              this.loginError = true
           })
       },
       validate () {
-          console.log('validate')
+          //console.log('validate')
         if (this.$refs.form.validate()) {
           this.snackbar = true
         }
