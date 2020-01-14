@@ -67,16 +67,7 @@
             </v-col>
         </v-row>
 
-        <v-row>
-            <v-col cols="12" sm="6" md="3">
-                <v-text-field
-                    label="Year"
-                    v-model="newAsset.password"
-                ></v-text-field>
-            </v-col>
-        </v-row>
-
-        <v-btn @click="submit()">Insertz</v-btn>
+        <v-btn @click="submit()">Insert item</v-btn>
 
     </v-container>
 </template>
@@ -98,8 +89,7 @@ export default {
               affiliateLink: '',
               category: '',
               price: '',
-              clicks: 0,
-              password: ''
+              clicks: 0
           }
       }
   },
