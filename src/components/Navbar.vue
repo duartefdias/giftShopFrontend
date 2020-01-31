@@ -16,11 +16,15 @@
 </template>
 
 <script>
+import store from '@/store'
+
     export default {
         name: 'Navbar',
         data() {
             return {
-                navBarItems: [
+                navBarItems: [],
+                currentMenuOnDisplay: 1,
+                userNavBar: [
                     {
                         title: 'Home',
                         path: '/',
@@ -32,17 +36,45 @@
                         index: 2
                     },
                     {
-                        title: 'Login',
-                        path: '/login',
+                        title: 'Logout',
+                        path: '/logout',
                         index: 3
                     }
                 ],
-                currentMenuOnDisplay: 1
+                visitorNavBar: [
+                    {
+                        title: 'Home',
+                        path: '/',
+                        index: 1
+                    },
+                    {
+                        title: 'Login',
+                        path: '/login',
+                        index: 2
+                    }
+                ]
             }
+        },
+        created() {
+            this.updateNavBarItems()
         },
         methods: {
             changeUnderlining(newIndex) {
                 this.currentMenuOnDisplay = newIndex
+            },
+            updateNavBarItems() {
+                if(store.getters.isLoggedIn) {
+                    this.navBarItems = this.userNavBar
+                }
+                else {
+                    this.navBarItems = this.visitorNavBar
+                }
+            }
+        },
+        watch: {
+            // Change navbar items if user is authenticated
+            '$store.getters.isLoggedIn': function() {
+                this.updateNavBarItems()
             }
         }
     }
