@@ -36,6 +36,11 @@ import store from '@/store'
                         index: 2
                     },
                     {
+                        title: 'Curator',
+                        path: '/curator',
+                        index: 2
+                    },
+                    {
                         title: 'Logout',
                         path: '/logout',
                         index: 3
