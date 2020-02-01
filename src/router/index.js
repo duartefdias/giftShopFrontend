@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import Insert from '@/views/Insert'
 import Login from '@/views/Login'
+import Curator from '@/views/Curator'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,14 @@ const routes = [
     path: '/insert',
     name: 'insert',
     component: Insert,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/Curator',
+    name: 'curator',
+    component: Curator,
     meta: {
       requiresAuth: true
     }
