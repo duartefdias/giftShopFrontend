@@ -40,5 +40,5 @@ steps:
     azureSubscription: 'Visual Studio Enterprise(662e1204-693d-4bd2-b413-9ed4ad4073fd)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az cdn endpoint purge --resource-group $1 --profile-name $3 --name $4 --no-wait --content-paths /*'
-    arguments: '$(Lambda) $(twg) $(twg)'
+    inlineScript: 'az cdn endpoint purge --resource-group lambda --profile-name twg --name twg --no-wait --content-paths /*'
+    arguments:
