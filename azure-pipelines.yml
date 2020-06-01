@@ -27,14 +27,6 @@ steps:
     dir
   displayName: 'list cwd contents (verify build)'
 
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Visual Studio Enterprise(662e1204-693d-4bd2-b413-9ed4ad4073fd)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az cdn endpoint purge --resource-group $1 --profile-name $3 --name $4 --no-wait --content-paths /*'
-    arguments: '$(Lambda) $(twg) $(twg)'
-
 - task: AzureFileCopy@3
   inputs:
     SourcePath: 'dist'
@@ -42,3 +34,11 @@ steps:
     Destination: 'AzureBlob'
     storage: 'thatweirdgiftfrontend'
     ContainerName: '$web'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise(662e1204-693d-4bd2-b413-9ed4ad4073fd)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az cdn endpoint purge --resource-group $1 --profile-name $3 --name $4 --no-wait --content-paths /*'
+    arguments: '$(Lambda) $(twg) $(twg)'
