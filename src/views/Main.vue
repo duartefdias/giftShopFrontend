@@ -84,7 +84,6 @@ export default {
     },
 
     async deleteItem(itemId) {
-      console.log(itemId)
       await api().delete('/items/',
       {
         headers: {
