@@ -33,7 +33,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az cdn endpoint purge --resource-group $1 --profile-name $3 --name $4 --no-wait --content-paths /*'
-    arguments: '$(Lambda) $(thatweirdgiftfrontend) $(twg) $(twg.azureedge.net)'
+    arguments: '$(Lambda) $(twg) $(twg)'
 
 - task: AzureFileCopy@3
   inputs:
