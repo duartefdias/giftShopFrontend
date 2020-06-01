@@ -95,7 +95,11 @@ export default {
   },
   methods: {
       async submit() {
-          await api().post('/items/insert', this.newAsset)
+          await api().post('/items/insert', this.newAsset, {
+              headers: {
+                  Authorization: this.$store.state.Auth.token
+              }
+          })
       }
   }
 }

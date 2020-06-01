@@ -28,7 +28,10 @@
     <!-- GRID WITH ITEMS -->
     <v-layout wrap :key="this.updateItems">
       <v-flex v-for="(item, index) in assetList.data" xs12 sm6 md4 lg3 v-bind:key="index">
-        <Item v-bind:item="item"/>
+        <div class="card-container">
+          <button v-if="userLoggedIn" v-on:click="deleteItem(item._id)" class="delete-button">&#10006;</button>
+          <Item v-bind:item="item"/>
+        </div>
       </v-flex>
     </v-layout>
 
@@ -56,23 +59,57 @@ export default {
       assetList: [],
       filterOptions: [ 'Random', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Random',
-      updateItems: 0
+      updateItems: 0,
+      userLoggedIn: this.$store.getters.isLoggedIn
     }
   },
   methods: {
     toggleAdvancedSearch() {
-       this.advancedSearch = !this.advancedSearch 
+      this.advancedSearch = !this.advancedSearch 
     },
 
     async getAssets() {
-        this.assetList = await api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria))
-        this.updateItems++
+      this.assetList = await api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria))
+      this.updateItems++
+    },
+
+    toggleDelete() {
+      if (this.$store.getters.isLoggedIn) {
+        this.userLoggedIn = true
+      }
+      else {
+        this.userLoggedIn = false
+      }
+      this.updateItems++
+    },
+
+    async deleteItem(itemId) {
+      console.log(itemId)
+      await api().delete('/items/',
+      {
+        headers: {
+          Authorization: this.$store.state.Auth.token
+        },
+        data: {
+          _id: itemId
+        }
+      })
+      // Remove from local array
+      this.assetList.data.splice(this.assetList.data.findIndex(item => item._id === itemId), 1)
+      // Update local array
+      this.updateItems++
     }
 
   },
   created() {
     this.getAssets()
-  }
+  },
+  watch: {
+            // Enable delete mode if logged in
+            '$store.getters.isLoggedIn': function() {
+                this.toggleDelete()
+            }
+        }
 }
 </script>
 
@@ -85,5 +122,28 @@ export default {
   .toggle-arrow {
     margin: 0 5px 0 0;
   }
+
+  .card-container {
+    overflow: visible;
+  }
+
+  .delete-button {
+    transition: all 0.5s ease;
+    position: absolute;
+    background-color: #FF9980;
+    padding: 1.5px 7px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: white;
+    -webkit-box-shadow: -4px -2px 6px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: -4px -2px 6px 0px rgba(0,0,0,0.1);
+    box-shadow: -3px 1px 6px 0px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.delete-button:hover {
+    background-color: tomato;
+    color: #fff;
+}
 
 </style>
