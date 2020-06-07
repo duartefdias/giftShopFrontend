@@ -38,12 +38,12 @@ import store from '@/store'
                     {
                         title: 'Curator',
                         path: '/curator',
-                        index: 2
+                        index: 3
                     },
                     {
                         title: 'Logout',
                         path: '/logout',
-                        index: 3
+                        index: 4
                     }
                 ],
                 visitorNavBar: [
