@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import Insert from '@/views/Insert'
 import Login from '@/views/Login'
+import Logout from '@/views/Logout'
 import Curator from '@/views/Curator'
 
 Vue.use(VueRouter)
@@ -48,6 +49,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: Logout
   }
 ]
 
