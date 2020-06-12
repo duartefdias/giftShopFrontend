@@ -6,6 +6,7 @@
     </div>
     <div class="controls">
       <button @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
+      <button @click="changeInfo " class="button"><i class="info"></i><span class="text-hidden">info</span></button>
       <button @click="next" class="button"><i class="next"></i><span class="text-hidden">next</span></button>
     </div>
   </div>
@@ -44,6 +45,10 @@ export default {
       this.insertProductToDb(this.curatorAuxArray[0])
       // Remove product from curator db
       this.deleteCuratorItem(this.curatorAuxArray[0]._id)
+    },
+
+    changeInfo() {
+      // Show a form to edit the product's details
     },
 
     async getNextProducts() {
@@ -162,6 +167,16 @@ export default {
     width: 20px;
     height:5px;
     background: rgb(230,104,104);
+    -webkit-transform: rotate(-90deg);
+  }
+  .button .info{
+    display: inline-block;
+    width: 20px;
+    height:5px;
+    background: rgb(88, 115, 160);
+    line-height: 0;
+    font-size:0;
+    vertical-align: middle;
     -webkit-transform: rotate(-90deg);
   }
   .controls .text-hidden {
