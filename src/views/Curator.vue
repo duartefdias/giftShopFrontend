@@ -1,9 +1,8 @@
 <!-- TEMPLATE CODE FROM: https://vuejsexamples.com/a-nice-slide-component-with-vue/-->
 <template>
   <div class="mid-center background">
-    <h1>Under construction...</h1>
     <div class="stack-wrapper">
-      <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
+      <stack ref="stack" :pages="productList" :stackinit="stackinit"></stack>
     </div>
     <div class="controls">
       <button @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
@@ -11,45 +10,24 @@
     </div>
   </div>
 </template>
+
 <script>
+import api from '@/api'
+
 import stack from '../components/Stack'
 export default {
   el: '#stack',
   data () {
     return {
       someList: [],
+      productList: [],
+      curatorAuxArray: [],
       stackinit: {
         visible: 3
       }
     }
   },
   mounted () {
-    let that = this
-    setTimeout(function () {
-      that.someList = [
-        {
-          html: '<img src="https://images-na.ssl-images-amazon.com/images/I/81ItYUEuZxL._SL1500_.jpg" alt="01">'
-        },
-        {
-          html: '<img src="https://images-na.ssl-images-amazon.com/images/I/81DFF-F7Y0L._SL1500_.jpg" alt="02">'
-        },
-        {
-          html: '<img src="https://www.japantrendshop.com/img/village-vanguard/nyanko-charge-cat-head-phone-charger-battery-1.jpg" alt="03">'
-        },
-        {
-          html: '<img src="https://images-na.ssl-images-amazon.com/images/I/71uhMZRFSeL._UL1500_.jpg" alt="04">'
-        },
-        {
-          html: '<img src="https://i.etsystatic.com/7192165/r/il/a5411b/1725253276/il_1588xN.1725253276_firt.jpg" alt="05">'
-        },
-        {
-          html: '<img src="https://ksr-ugc.imgix.net/assets/027/095/623/673169bf96209a024152c63b1cc2019f_original.jpg?ixlib=rb-2.1.0&w=680&fit=max&v=1572942227&auto=format&gif-q=50&q=92&s=280b80337e16d014cb8ba22cefe17ada" alt="06">'
-        },
-        {
-          html: '<img src="src/img/7.png" alt="07">'
-        }
-      ]
-    }, 2000)
   },
   components: {
     stack
@@ -57,9 +35,53 @@ export default {
   methods: {
     prev () {
       this.$refs.stack.$emit('prev')
+      // Remove product from curator db
+      this.deleteCuratorItem(this.curatorAuxArray[0]._id)
     },
     next () {
       this.$refs.stack.$emit('next')
+      // Add product to items db
+      this.insertProductToDb(this.curatorAuxArray[0])
+      // Remove product from curator db
+      this.deleteCuratorItem(this.curatorAuxArray[0]._id)
+    },
+
+    async getNextProducts() {
+      this.productList = await api().get('/curator/')
+      this.productList = this.productList.data
+      this.curatorAuxArray = this.productList.concat()
+    },
+
+    async deleteCuratorItem(itemId) {
+      await api().delete('/curator/',
+      {
+        data: {
+          id: itemId
+        }
+      })
+      console.log('Removed item from local list: ' + this.curatorAuxArray.shift())
+    },
+
+    async insertProductToDb(product) {
+          await api().post('/items/insert', product, {
+              headers: {
+                  Authorization: this.$store.state.Auth.token
+              }
+          })
+      }
+  },
+  async created() {
+    var currentContext = this
+    setTimeout(function () {
+      currentContext.getNextProducts()
+    }, 2000)
+  },
+  watch: {
+    // Get more products after a few swipes
+    'numberOfSwipes': function() {
+      if(this.numberOfSwipes == 1) {
+        this.updateTemplate++
+      }
     }
   }
 }
@@ -73,8 +95,8 @@ export default {
     margin: 0 auto;
     position: relative;
     z-index: 1000;
-    width: 320px;
-    height: 320px;
+    width: 420px;
+    height: 470px;
     padding: 0;
     list-style: none;
     pointer-events: none;

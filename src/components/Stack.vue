@@ -13,13 +13,19 @@
       @webkit-transition-end="onTransitionEnd(index)"
       @transitionend="onTransitionEnd(index)"
       v-bind:key="index">
-        <div v-html="item.html"></div>
+        <!--<div v-html="item.html"></div>-->
+        <Item v-bind:item="item"/>
       </li>
     </ul>
 </template>
 <script>
+import Item from '@/components/Item'
+
 import detectPrefixes from '../sliderComponents/detect-prefixes.js'
 export default {
+  components: {
+    Item
+  },
   props: {
     stackinit: {
       type: Object
