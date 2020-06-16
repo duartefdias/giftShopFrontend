@@ -27,7 +27,7 @@ steps:
     dir
   displayName: 'list cwd contents (verify build)'
 
-- task: AzureFileCopy@4
+- task: AzureFileCopy@3
   inputs:
     SourcePath: 'dist'
     azureSubscription: 'Visual Studio Enterprise(662e1204-693d-4bd2-b413-9ed4ad4073fd)'
