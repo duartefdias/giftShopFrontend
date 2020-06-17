@@ -1,7 +1,10 @@
 <!-- TEMPLATE CODE FROM: https://vuejsexamples.com/a-nice-slide-component-with-vue/-->
 <template>
+
+  <!-- Tinder slider -->
   <div class="mid-center background">
     <div class="stack-wrapper">
+      <span v-if="productList.length == 0" style="text-align: center; vertical-align: middle">Curator database is empty</span>
       <stack ref="stack" :pages="productList" :stackinit="stackinit"></stack>
     </div>
     <div class="controls">
@@ -9,6 +12,71 @@
       <button @click="changeInfo " class="button"><i class="info"></i><span class="text-hidden">info</span></button>
       <button @click="next" class="button"><i class="next"></i><span class="text-hidden">next</span></button>
     </div>
+
+    <!-- Product edit details form -->
+    <v-container v-if="showInfo" :key="updateCurrentProductDetails">
+
+        <v-row>
+            <v-col cols="12">
+                <h2>Edit item details</h2>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" sm="6" md="3">
+                <v-text-field
+                    label="Title"
+                    v-model="currentProduct.title"
+                ></v-text-field>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" sm="12" md="12">
+                <v-text-field
+                    label="Image URL (include 'http://'!!)"
+                    v-model="currentProduct.imageURL"
+                ></v-text-field>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <v-textarea
+                color="teal"
+                v-model="currentProduct.description"
+                >
+                <template v-slot:label>
+                    <div>
+                    Description <small>(optional)</small>
+                    </div>
+                </template>
+                </v-textarea>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" sm="6" md="3">
+                <v-text-field
+                    label="Price (USA Dollars $)"
+                    v-model="currentProduct.price"
+                ></v-text-field>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" sm="6" md="3">
+                <v-text-field
+                    label="Category"
+                    v-model="currentProduct.category"
+                ></v-text-field>
+            </v-col>
+        </v-row>
+
+        <v-btn @click="submit()">Edit item</v-btn>
+
+    </v-container>
+
   </div>
 </template>
 
@@ -25,7 +93,10 @@ export default {
       curatorAuxArray: [],
       stackinit: {
         visible: 3
-      }
+      },
+      currentProduct: {},
+      showInfo: false,
+      updateCurrentProductDetails: 0
     }
   },
   mounted () {
@@ -36,19 +107,32 @@ export default {
   methods: {
     prev () {
       this.$refs.stack.$emit('prev')
-      // Remove product from curator db
-      this.deleteCuratorItem(this.curatorAuxArray[0]._id)
+      this.onSwipe()
     },
     next () {
       this.$refs.stack.$emit('next')
       // Add product to items db
       this.insertProductToDb(this.curatorAuxArray[0])
+      this.onSwipe()
+    },
+
+    onSwipe() {
       // Remove product from curator db
       this.deleteCuratorItem(this.curatorAuxArray[0]._id)
+      // Update current product
+      if(this.curatorAuxArray.length > 0) {
+        this.currentProduct = this.curatorAuxArray[0]
+      }
+      // Update product details form
+      this.updateCurrentProductDetails++
     },
 
     changeInfo() {
-      // Show a form to edit the product's details
+        // Show a form to edit the product's details
+        this.currentProduct = this.curatorAuxArray[0]
+        this.showInfo = !this.showInfo
+      // Update product details form
+      this.updateCurrentProductDetails++
     },
 
     async getNextProducts() {
@@ -64,7 +148,9 @@ export default {
           id: itemId
         }
       })
-      console.log('Removed item from local list: ' + this.curatorAuxArray.shift())
+      //console.log('Removed item from local list: ' + this.curatorAuxArray.shift())
+      // Remove first element from array
+      this.curatorAuxArray.shift()
     },
 
     async insertProductToDb(product) {
@@ -93,8 +179,9 @@ export default {
 </script>
 <style>
 .background{
-    background-color: #565f77;
+    background-color: #c9c9c975;
     padding-bottom: 30px;
+    height: 100%;
 }
   .stack-wrapper{
     margin: 0 auto;
@@ -106,6 +193,7 @@ export default {
     list-style: none;
     pointer-events: none;
   }
+
   .controls{
     position: relative;
     width: 200px;
