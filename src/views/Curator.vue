@@ -29,7 +29,7 @@
         </v-row>
 
         <v-row>
-            <v-col cols="12" sm="6" md="3">
+            <v-col cols="12" sm="12" md="8">
                 <v-text-field
                     label="Title"
                     v-model="currentProduct.title"
@@ -163,6 +163,9 @@ export default {
       if(this.curatorAuxArray.length > 0) {
         this.currentProduct = this.curatorAuxArray[0]
       }
+      // Trim title and description
+      this.currentProduct.title = this.currentProduct.title.substring(0, 30)
+      this.currentProduct.description = this.currentProduct.description.substring(0, 100)
 
       this.dataLoaded = true
     },
