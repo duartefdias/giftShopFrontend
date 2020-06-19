@@ -26,14 +26,14 @@
     </v-row>
 
     <!-- GRID WITH ITEMS -->
-    <v-layout wrap :key="this.updateItems">
-      <v-flex v-for="(item, index) in assetList.data" xs12 sm6 md4 lg3 v-bind:key="index">
+    <v-row wrap :key="this.updateItems">
+      <v-col v-for="(item, index) in assetList.data" cols="12" xs="12" sm="6" md="4" lg="3" v-bind:key="index">
         <div class="card-container">
           <button v-if="userLoggedIn" v-on:click="deleteItem(item._id)" class="delete-button">&#10006;</button>
           <Item v-bind:item="item"/>
         </div>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
   </v-container>
 </template>
