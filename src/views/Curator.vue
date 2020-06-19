@@ -163,11 +163,10 @@ export default {
       if(this.curatorAuxArray.length > 0) {
         this.currentProduct = this.curatorAuxArray[0]
       }
+      this.dataLoaded = true
       // Trim title and description
       this.currentProduct.title = this.currentProduct.title.substring(0, 30)
       this.currentProduct.description = this.currentProduct.description.substring(0, 100)
-
-      this.dataLoaded = true
     },
 
     async deleteCuratorItem(itemId) {
