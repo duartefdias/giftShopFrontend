@@ -1,7 +1,7 @@
 <template>
-    <v-container @click="itemClicked()" min-height="450px" min-width="300px">
+    <v-container @click="itemClicked()" min-height="400px" min-width="300px">
         <v-row justify="center">
-            <v-card hover height="450px" width="291px">
+            <v-card hover height="400px" width="291px">
                 <v-img
                 class="white--text align-end"
                 height="200px"

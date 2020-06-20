@@ -114,6 +114,7 @@ export default {
                   Authorization: this.$store.state.Auth.token
               }
           })
+          alert('Item inserted!')
       }
   }
 }

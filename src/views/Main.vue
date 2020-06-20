@@ -84,19 +84,21 @@ export default {
     },
 
     async deleteItem(itemId) {
-      await api().delete('/items/',
-      {
-        headers: {
-          Authorization: this.$store.state.Auth.token
-        },
-        data: {
-          _id: itemId
-        }
-      })
-      // Remove from local array
-      this.assetList.data.splice(this.assetList.data.findIndex(item => item._id === itemId), 1)
-      // Update local array
-      this.updateItems++
+      if(confirm('Delete item?')){
+        await api().delete('/items/',
+        {
+          headers: {
+            Authorization: this.$store.state.Auth.token
+          },
+          data: {
+            _id: itemId
+          }
+        })
+        // Remove from local array
+        this.assetList.data.splice(this.assetList.data.findIndex(item => item._id === itemId), 1)
+        // Update local array
+        this.updateItems++
+      }
     }
 
   },
