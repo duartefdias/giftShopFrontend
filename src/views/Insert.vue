@@ -60,10 +60,11 @@
 
         <v-row>
             <v-col cols="12" sm="6" md="3">
-                <v-text-field
-                    label="Category"
-                    v-model="newAsset.category"
-                ></v-text-field>
+                <v-select
+                :items="categories"
+                label="Category"
+                v-model="newAsset.category"
+                ></v-select>
             </v-col>
         </v-row>
 
@@ -94,19 +95,17 @@ export default {
   components: {
       Item
   },
-  data() {
-      return {
-          newAsset: {
-              title: '',
-              imageURL: '',
-              description: '',
-              affiliateLink: '',
-              category: '',
-              price: '',
-              clicks: 0
-          }
-      }
-  },
+  data: () => ({
+        newAsset: {
+            title: '',
+            imageURL: '',
+            description: '',
+            affiliateLink: '',
+            category: '',
+            price: '',
+            clicks: 0
+        }
+  }),
   methods: {
       async submit() {
           await api().post('/items/insert', this.newAsset, {
@@ -116,6 +115,16 @@ export default {
           })
           alert('Item inserted!')
       }
-  }
+  },
+  created() {
+      this.categories = [
+                'weird',
+                'man',
+                'woman',
+                'boy',
+                'girl',
+                'tech'
+            ]
+  },
 }
 </script>
