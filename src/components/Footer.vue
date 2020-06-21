@@ -5,7 +5,7 @@
   >
 
   <v-row justify="center" align="center">
-    <v-col cols="12" xs="6" sm="4" md="3" lg="3">
+    <v-col cols="12" xs="6" sm="4" md="3" lg="3" style="text-align: center">
       &copy;{{ new Date().getFullYear() }} — <strong>That weird gift</strong>
     </v-col>
   </v-row>
