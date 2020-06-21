@@ -18,7 +18,7 @@
             <v-select
                 :items="filterOptions"
                 v-model="filterCriteria"
-                @change="getAssets()"
+                @change="getAssets(true)"
                 label="Filter criteria"
                 outlined
             ></v-select>
@@ -87,7 +87,6 @@ export default {
         this.currentPage = 0
       }
       var fetchedItems = await api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria) + '/' + this.currentPage + '/' + this.categoryFilter)
-      console.log(fetchedItems.data)
       this.assetList.push(...fetchedItems.data)
       this.updateItems++
     },
