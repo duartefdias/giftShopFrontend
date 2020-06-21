@@ -23,11 +23,21 @@
                 outlined
             ></v-select>
         </v-col>
+
+        <v-col xs="12" sm="6" md="4" lg="3">
+            <v-select
+                :items="categoryOptions"
+                v-model="categoryFilter"
+                @change="getAssets(true)"
+                label="Category"
+                outlined
+            ></v-select>
+        </v-col>
     </v-row>
 
     <!-- GRID WITH ITEMS -->
     <v-row wrap :key="this.updateItems">
-      <v-col v-for="(item, index) in assetList.data" cols="12" xs="12" sm="6" md="4" lg="3" v-bind:key="index">
+      <v-col v-for="(item, index) in assetList" cols="12" xs="12" sm="6" md="4" lg="3" v-bind:key="index">
         <div class="card-container">
           <button v-if="userLoggedIn" v-on:click="deleteItem(item._id)" class="delete-button">&#10006;</button>
           <Item v-bind:item="item"/>
@@ -59,8 +69,11 @@ export default {
       assetList: [],
       filterOptions: [ 'Random', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Random',
+      categoryOptions: ['', 'tech', 'weird', 'man', 'woman', 'boy', 'girl'],
+      categoryFilter: '',
       updateItems: 0,
-      userLoggedIn: this.$store.getters.isLoggedIn
+      userLoggedIn: this.$store.getters.isLoggedIn,
+      currentPage: 0
     }
   },
   methods: {
@@ -68,8 +81,14 @@ export default {
       this.advancedSearch = !this.advancedSearch 
     },
 
-    async getAssets() {
-      this.assetList = await api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria))
+    async getAssets(resetList = false) {
+      if(resetList) {
+        this.assetList = []
+        this.currentPage = 0
+      }
+      var fetchedItems = await api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria) + '/' + this.currentPage + '/' + this.categoryFilter)
+      console.log(fetchedItems.data)
+      this.assetList.push(...fetchedItems.data)
       this.updateItems++
     },
 
@@ -104,6 +123,18 @@ export default {
   },
   created() {
     this.getAssets()
+    this.currentPage++
+  },
+  mounted() {
+    window.onscroll = () => {
+      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+      if (bottomOfWindow) {
+        // Fetch more items once end of page is reached
+        this.getAssets()
+        this.currentPage++
+      }
+    }
   },
   watch: {
             // Enable delete mode if logged in
