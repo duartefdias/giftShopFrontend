@@ -113,7 +113,7 @@ export default {
           }
         })
         // Remove from local array
-        this.assetList.data.splice(this.assetList.data.findIndex(item => item._id === itemId), 1)
+        this.assetList.splice(this.assetList.findIndex(item => item._id === itemId), 1)
         // Update local array
         this.updateItems++
       }
