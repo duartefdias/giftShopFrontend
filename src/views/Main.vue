@@ -69,7 +69,7 @@ export default {
       assetList: [],
       filterOptions: [ 'Random', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Random',
-      categoryOptions: ['', 'tech', 'weird', 'man', 'woman', 'boy', 'girl'],
+      categoryOptions: ['', 'tech', 'weird', 'food', 'pets', 'clothing', 'books', 'man', 'woman', 'boy', 'girl'],
       categoryFilter: '',
       updateItems: 0,
       userLoggedIn: this.$store.getters.isLoggedIn,
@@ -113,7 +113,7 @@ export default {
           }
         })
         // Remove from local array
-        this.assetList.data.splice(this.assetList.data.findIndex(item => item._id === itemId), 1)
+        this.assetList.splice(this.assetList.findIndex(item => item._id === itemId), 1)
         // Update local array
         this.updateItems++
       }
@@ -122,7 +122,6 @@ export default {
   },
   created() {
     this.getAssets()
-    this.currentPage++
   },
   mounted() {
     window.onscroll = () => {
@@ -130,8 +129,8 @@ export default {
 
       if (bottomOfWindow) {
         // Fetch more items once end of page is reached
-        this.getAssets()
         this.currentPage++
+        this.getAssets()
       }
     }
   },
