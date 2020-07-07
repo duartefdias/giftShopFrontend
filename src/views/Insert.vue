@@ -118,12 +118,16 @@ export default {
   },
   created() {
       this.categories = [
+                'tech',
                 'weird',
+                'food',
+                'pets',
+                'clothing',
+                'books',
                 'man',
                 'woman',
                 'boy',
-                'girl',
-                'tech'
+                'girl'
             ]
   },
 }
