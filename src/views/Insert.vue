@@ -120,6 +120,7 @@ export default {
       this.categories = [
                 'tech',
                 'weird',
+                'prank',
                 'food',
                 'pets',
                 'clothing',
