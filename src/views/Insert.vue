@@ -125,6 +125,7 @@ export default {
                 'pets',
                 'clothing',
                 'books',
+                'home',
                 'man',
                 'woman',
                 'boy',
