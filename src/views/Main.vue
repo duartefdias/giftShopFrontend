@@ -69,7 +69,7 @@ export default {
       assetList: [],
       filterOptions: [ 'Random', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Random',
-      categoryOptions: ['', 'tech', 'weird', 'prank', 'food', 'pets', 'clothing', 'books', 'home', 'man', 'woman', 'boy', 'girl'],
+      categoryOptions: ['', 'tech', 'weird', 'prank', 'food', 'pets', 'clothing', 'books', 'home', 'office', 'games', 'sports', 'man', 'woman', 'boy', 'girl'],
       categoryFilter: '',
       updateItems: 0,
       userLoggedIn: this.$store.getters.isLoggedIn,
