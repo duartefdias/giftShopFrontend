@@ -104,7 +104,7 @@ export default {
             category: '',
             price: '',
             clicks: 0
-        }
+        },
   }),
   methods: {
       async submit() {

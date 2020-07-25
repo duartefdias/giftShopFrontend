@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 import Main from '../views/Main.vue'
+import Manage from '../views/Manage.vue'
 import Insert from '@/views/Insert'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
@@ -22,6 +23,11 @@ const routes = [
     path: '/',
     name: 'main',
     component: Main
+  },
+  {
+    path: '/manage',
+    name: 'manage',
+    component: Manage
   },
   {
     path: '/insert',

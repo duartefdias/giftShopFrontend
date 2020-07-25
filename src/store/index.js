@@ -12,7 +12,24 @@ export default new Vuex.Store({
       title: '',
       priceRange: [null, null],
       category: ''
-    }
+    },
+    categories: [
+        'tech',
+        'weird',
+        'prank',
+        'food',
+        'pets',
+        'clothing',
+        'books',
+        'home',
+        'office',
+        'games',
+        'sports',
+        'man',
+        'woman',
+        'boy',
+        'girl'
+    ]
   },
   mutations: {
   },
