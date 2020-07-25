@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
-import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import Insert from '@/views/Insert'
 import Login from '@/views/Login'
@@ -11,11 +10,6 @@ import Curator from '@/views/Curator'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/home',
-    name: 'home',
-    component: Home
-  },
   {
     path: '/about',
     name: 'about',
