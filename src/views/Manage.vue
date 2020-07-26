@@ -121,7 +121,7 @@
                   </v-col>
               </v-row>
 
-              <v-btn @click="submit()" color="primary">Update item</v-btn>
+              <v-btn @click="editItem()" color="primary">Update item</v-btn>
               <v-btn @click="dialog = false" color="error" style="margin-left: 10px;">Close</v-btn>
 
             </v-col>
@@ -232,6 +232,22 @@ export default {
       this.editAsset = item
       this.dialog = !this.dialog
     },
+
+    async editItem() {
+      // Api call
+      await api().put('items/', this.editAsset,
+      {
+        headers: {
+            Authorization: this.$store.state.Auth.token
+          },
+      })
+      alert('Item updated!')
+      this.dialog = false
+      // Update item in front-end automatically
+      this.assetList[this.assetList.findIndex(x => x._id == this.editAsset._id)] = this.editAsset
+      // Update local array
+        this.updateItems++
+    }
 
   },
   created() {
