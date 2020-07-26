@@ -31,19 +31,24 @@ import store from '@/store'
                         index: 1
                     },
                     {
+                        title: 'Manage',
+                        path: '/manage',
+                        index: 2
+                    },
+                    {
                         title: 'Insert',
                         path: '/insert',
-                        index: 2
+                        index: 3
                     },
                     {
                         title: 'Curator',
                         path: '/curator',
-                        index: 3
+                        index: 4
                     },
                     {
                         title: 'Logout',
                         path: '/logout',
-                        index: 4
+                        index: 5
                     }
                 ],
                 visitorNavBar: [

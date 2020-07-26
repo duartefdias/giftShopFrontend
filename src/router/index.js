@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
-import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
+import Manage from '../views/Manage.vue'
 import Insert from '@/views/Insert'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
@@ -11,11 +11,6 @@ import Curator from '@/views/Curator'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/home',
-    name: 'home',
-    component: Home
-  },
   {
     path: '/about',
     name: 'about',
@@ -28,6 +23,11 @@ const routes = [
     path: '/',
     name: 'main',
     component: Main
+  },
+  {
+    path: '/manage',
+    name: 'manage',
+    component: Manage
   },
   {
     path: '/insert',

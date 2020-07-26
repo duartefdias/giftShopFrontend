@@ -104,7 +104,7 @@ export default {
             category: '',
             price: '',
             clicks: 0
-        }
+        },
   }),
   methods: {
       async submit() {
@@ -125,6 +125,10 @@ export default {
                 'pets',
                 'clothing',
                 'books',
+                'home',
+                'office',
+                'games',
+                'sports',
                 'man',
                 'woman',
                 'boy',

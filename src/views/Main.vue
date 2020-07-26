@@ -39,7 +39,6 @@
     <v-row wrap :key="this.updateItems">
       <v-col v-for="(item, index) in assetList" cols="12" xs="12" sm="6" md="4" lg="3" v-bind:key="index">
         <div class="card-container">
-          <button v-if="userLoggedIn" v-on:click="deleteItem(item._id)" class="delete-button">&#10006;</button>
           <Item v-bind:item="item"/>
         </div>
       </v-col>
@@ -69,7 +68,7 @@ export default {
       assetList: [],
       filterOptions: [ 'Random', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Random',
-      categoryOptions: ['', 'tech', 'weird', 'prank', 'food', 'pets', 'clothing', 'books', 'man', 'woman', 'boy', 'girl'],
+      categoryOptions: this.$store.state.categories,
       categoryFilter: '',
       updateItems: 0,
       userLoggedIn: this.$store.getters.isLoggedIn,
@@ -91,34 +90,6 @@ export default {
       this.updateItems++
     },
 
-    toggleDelete() {
-      if (this.$store.getters.isLoggedIn) {
-        this.userLoggedIn = true
-      }
-      else {
-        this.userLoggedIn = false
-      }
-      this.updateItems++
-    },
-
-    async deleteItem(itemId) {
-      if(confirm('Delete item?')){
-        await api().delete('/items/',
-        {
-          headers: {
-            Authorization: this.$store.state.Auth.token
-          },
-          data: {
-            _id: itemId
-          }
-        })
-        // Remove from local array
-        this.assetList.splice(this.assetList.findIndex(item => item._id === itemId), 1)
-        // Update local array
-        this.updateItems++
-      }
-    }
-
   },
   created() {
     this.getAssets()
@@ -135,9 +106,8 @@ export default {
     }
   },
   watch: {
-            // Enable delete mode if logged in
+            // Make changes is user is logged in
             '$store.getters.isLoggedIn': function() {
-                this.toggleDelete()
             }
         }
 }
