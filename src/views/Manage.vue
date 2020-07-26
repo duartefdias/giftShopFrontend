@@ -166,8 +166,8 @@ export default {
     return {
       advancedSearch: false,
       assetList: [],
-      filterOptions: [ 'Random', 'Most popular', 'Cost - lower', 'Cost - higher'],
-      filterCriteria: 'Random',
+      filterOptions: [ 'Most recent', 'Most popular', 'Cost - lower', 'Cost - higher'],
+      filterCriteria: 'Most recent',
       categoryOptions: this.$store.state.categories,
       categoryFilter: '',
       updateItems: 0,
