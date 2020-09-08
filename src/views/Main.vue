@@ -20,7 +20,7 @@
                 v-model="filterCriteria"
                 @change="getAssets(true)"
                 label="Filter criteria"
-                outlined
+                solo
             ></v-select>
         </v-col>
 
@@ -30,7 +30,7 @@
                 v-model="categoryFilter"
                 @change="getAssets(true)"
                 label="Category"
-                outlined
+                solo
             ></v-select>
         </v-col>
     </v-row>

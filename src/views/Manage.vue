@@ -20,7 +20,7 @@
                 v-model="filterCriteria"
                 @change="getAssets(true)"
                 label="Filter criteria"
-                outlined
+                solo
             ></v-select>
         </v-col>
 
@@ -30,7 +30,7 @@
                 v-model="categoryFilter"
                 @change="getAssets(true)"
                 label="Category"
-                outlined
+                solo
             ></v-select>
         </v-col>
     </v-row>
@@ -135,36 +135,24 @@
                   </v-col>
               </v-row>
 
-              <v-col>
-                <v-row>
-                  <v-col> 
-                    <span>Last updated: 
-                        <span v-if="editAsset.lastupdate">{{editAsset.lastupdate}}</span>
-                        <span v-else>Record not yet updated</span>
-                    </span>
-                  </v-col>
-                </v-row>
+              <v-row style="margin-bottom: 20px;">
+                <span>Date created: {{editAsset.createtime}} (UTC)</span>
+              </v-row>
 
-                <v-row>
-                  <v-col> 
-                    <span>Date created: {{editAsset.createtime}} (UTC)</span>
-                  </v-col>
-                </v-row>
-              </v-col>
+              <v-row style="margin-bottom: 40px;">
+                <span>Last updated: 
+                    <span v-if="editAsset.lastupdate">{{editAsset.lastupdate}}</span>
+                    <span v-else>Record not yet updated</span>
+                </span>
+              </v-row>
 
-              <v-col>
-                <v-row>
-                  <v-col>
-                    <span>Clicks:</span>
-                  </v-col>
-                </v-row>
+              <v-row justify="center" style="margin-bottom: 20px;">
+                <span>Clicks:</span>
+              </v-row>
 
-                <v-row>
-                  <v-col>
-                    <span>{{editAsset.clicks}}</span>
-                  </v-col>
-                </v-row>
-              </v-col>
+              <v-row justify="center" style="font-size: 20px; ">
+                <span>{{editAsset.clicks}}</span>
+              </v-row>
 
             </v-col>
 

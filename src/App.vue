@@ -2,7 +2,7 @@
   <v-app>
     <Navbar/>
     
-    <v-content>
+    <v-content style="background-color: #EAE7DC">
       <router-view></router-view>
     </v-content>
 
