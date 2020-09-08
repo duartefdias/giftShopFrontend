@@ -135,6 +135,37 @@
                   </v-col>
               </v-row>
 
+              <v-col>
+                <v-row>
+                  <v-col> 
+                    <span>Last updated: 
+                        <span v-if="editAsset.lastupdate">{{editAsset.lastupdate}}</span>
+                        <span v-else>Record not yet updated</span>
+                    </span>
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                  <v-col> 
+                    <span>Date created: {{editAsset.createtime}} (UTC)</span>
+                  </v-col>
+                </v-row>
+              </v-col>
+
+              <v-col>
+                <v-row>
+                  <v-col>
+                    <span>Clicks:</span>
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                  <v-col>
+                    <span>{{editAsset.clicks}}</span>
+                  </v-col>
+                </v-row>
+              </v-col>
+
             </v-col>
 
           </v-row>
@@ -181,7 +212,9 @@ export default {
             affiliateLink: '',
             category: '',
             price: '',
-            clicks: 0
+            clicks: 0,
+            createtime: '',
+            lastupdate: ''
         }
     }
   },
