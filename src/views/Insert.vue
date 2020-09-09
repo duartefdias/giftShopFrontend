@@ -12,6 +12,7 @@
                 <v-text-field
                     label="Title"
                     v-model="newAsset.title"
+                    solo
                 ></v-text-field>
             </v-col>
         </v-row>
@@ -21,6 +22,7 @@
                 <v-text-field
                     label="Image URL (include 'http://'!!)"
                     v-model="newAsset.imageURL"
+                    solo
                 ></v-text-field>
             </v-col>
         </v-row>
@@ -30,6 +32,7 @@
                 <v-textarea
                 color="teal"
                 v-model="newAsset.description"
+                solo
                 >
                 <template v-slot:label>
                     <div>
@@ -45,6 +48,7 @@
                 <v-text-field
                     label="Amazon affiliate link (include 'http://'!!)"
                     v-model="newAsset.affiliateLink"
+                    solo
                 ></v-text-field>
             </v-col>
         </v-row>
@@ -54,6 +58,7 @@
                 <v-text-field
                     label="Price (USA Dollars $)"
                     v-model="newAsset.price"
+                    solo
                 ></v-text-field>
             </v-col>
         </v-row>
@@ -64,6 +69,7 @@
                 :items="categories"
                 label="Category"
                 v-model="newAsset.category"
+                solo
                 ></v-select>
             </v-col>
         </v-row>

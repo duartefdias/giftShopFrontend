@@ -2,7 +2,7 @@
   <v-app>
     <Navbar/>
     
-    <v-content>
+    <v-content class="app-background">
       <router-view></router-view>
     </v-content>
 
@@ -27,3 +27,7 @@ export default {
   }),
 };
 </script>
+
+<style lang="sass">
+  @import '@/styles/mainElements.scss'
+</style>
