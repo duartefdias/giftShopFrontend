@@ -1,7 +1,7 @@
 <template>
     <v-container @click="itemClicked()" min-height="400px" min-width="300px">
         <v-row justify="center">
-            <v-card hover height="400px" width="291px" class="item-cards">
+            <v-card hover height="400px" width="291px" class="item-cards" style="background-color: #D3E3FC;">
                 <v-img
                 class="white--text align-end"
                 height="200px"
@@ -68,8 +68,6 @@
     }
 </script>
 
-<style lang="sass">
-
-//@import '@/styles/mainElements.scss'
+<style>
 
 </style>
