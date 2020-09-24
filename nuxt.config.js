@@ -37,6 +37,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    { src: '~/plugins/infiniteloading', ssr: false }
   ],
   /*
   ** Auto import components

@@ -44,6 +44,14 @@
       </v-col>
     </v-row>
 
+    <infinite-loading 
+      v-if="assetList.length"
+      spinner="spiral"
+      @infinite="infiniteScroll"
+    >
+      <div slot="no-more">No more items...</div>
+    </infinite-loading>
+
   </v-container>
 </template>
 
@@ -90,12 +98,30 @@ export default {
       this.updateItems++
     },
 
+    // Third party infinite scroll - see definition in src/plugins
+    infiniteScroll($state) {
+      setTimeout(() => {
+      this.currentPage++
+      api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria) + '/' + this.currentPage + '/' + this.categoryFilter)
+
+      .then((response) => {
+        if (response.data.length > 1) {
+          response.data.forEach((item) => this.assetList.push(item))
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      }).catch((err) => {console.log(err)})
+    }, 500)
+
+    }
+
   },
   created() {
     this.getAssets()
   },
   mounted() {
-    window.onscroll = () => {
+    /*window.onscroll = () => {
       let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
       if (bottomOfWindow) {
@@ -103,7 +129,7 @@ export default {
         this.currentPage++
         this.getAssets()
       }
-    }
+    }*/
   },
   watch: {
             // Make changes is user is logged in

@@ -190,7 +190,7 @@ export default {
       categoryOptions: this.$store.state.categories,
       categoryFilter: '',
       updateItems: 0,
-      userLoggedIn: this.$store.getters.isLoggedIn,
+      userLoggedIn: this.$store.state.auth.token,
       currentPage: 0,
       dialog: false,
       editAsset: {
