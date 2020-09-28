@@ -72,7 +72,7 @@
                 this.currentMenuOnDisplay = newIndex
             },
             updateNavBarItems() {
-                if(this.$store.state.auth.token/*this.$store.getters.isLoggedIn*/) {
+                if(this.$store.getters['auth/isLoggedIn']) {
                     this.navBarItems = this.userNavBar
                 }
                 else {
@@ -82,13 +82,13 @@
         },
         computed: {
             isLoggedIn () {
-                return this.$store.state.auth.token
+                return this.$store.getters['auth/isLoggedIn']
             }
         },
         watch: {
             // Change navbar items if user is authenticated
             isLoggedIn: function() {
-                console.log('watcher triggeredddd')
+                //console.log('watcher triggeredddd')
                 this.updateNavBarItems()
             }
         }

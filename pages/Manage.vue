@@ -39,6 +39,7 @@
     <v-row wrap :key="this.updateItems">
       <v-col v-for="(item, index) in assetList" cols="12" xs="12" sm="6" md="4" lg="3" v-bind:key="index">
         <div class="card-container">
+          <div v-if="userLoggedIn" class="click-counter">{{item.clicks}}</div>
           <button v-if="userLoggedIn" v-on:click="editButtonClicked(item)" class="edit-button">i</button>
           <button v-if="userLoggedIn" v-on:click="deleteItem(item._id)" class="delete-button">&#10006;</button>
           <Item v-bind:item="item"/>
@@ -163,6 +164,14 @@
       </v-card>
     </v-dialog>
 
+    <infinite-loading 
+      v-if="assetList.length"
+      spinner="spiral"
+      @infinite="infiniteScroll"
+    >
+      <div slot="no-more">No more items...</div>
+    </infinite-loading>
+
   </v-container>
 </template>
 
@@ -187,10 +196,10 @@ export default {
       assetList: [],
       filterOptions: [ 'Most recent', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Most recent',
-      categoryOptions: this.$store.state.categories,
+      categoryOptions: this.$store.state.items.categories,
       categoryFilter: '',
       updateItems: 0,
-      userLoggedIn: this.$store.state.auth.token,
+      userLoggedIn: this.$store.getters['auth/isLoggedIn'],
       currentPage: 0,
       dialog: false,
       editAsset: {
@@ -268,6 +277,24 @@ export default {
       this.assetList[this.assetList.findIndex(x => x._id == this.editAsset._id)] = this.editAsset
       // Update local array
         this.updateItems++
+    },
+
+    // Third party infinite scroll - see definition in src/plugins
+    infiniteScroll($state) {
+      setTimeout(() => {
+      this.currentPage++
+      api().get('/items/' + this.filterOptions.indexOf(this.filterCriteria) + '/' + this.currentPage + '/' + this.categoryFilter)
+
+      .then((response) => {
+        if (response.data.length > 1) {
+          response.data.forEach((item) => this.assetList.push(item))
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      }).catch((err) => {console.log(err)})
+    }, 500)
+
     }
 
   },
@@ -275,7 +302,7 @@ export default {
     this.getAssets()
   },
   mounted() {
-    window.onscroll = () => {
+    /*window.onscroll = () => {
       let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
       if (bottomOfWindow) {
@@ -283,14 +310,20 @@ export default {
         this.currentPage++
         this.getAssets()
       }
-    }
+    }*/
   },
   watch: {
             // Enable delete mode if logged in
             '$store.getters.isLoggedIn': function() {
                 this.toggleDelete()
             }
-        }
+        },
+
+  computed: {
+    /*userLoggedIn () {
+      return this.$store.getters['auth/isLoggedIn']
+    }*/
+  }
 }
 </script>
 
@@ -346,6 +379,20 @@ export default {
 .edit-button:hover {
   background-color: #7993cc;
   color: #fff;
+}
+
+.click-counter {
+  margin: 0 0 0 20px;
+  transition: all 0.5s ease;
+  position: absolute;
+  background-color: #83a0e0;
+  padding: 1.5px 25px;
+  border: 2px solid #fff;
+  color: white;
+  -webkit-box-shadow: -4px -2px 6px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: -4px -2px 6px 0px rgba(0,0,0,0.1);
+  box-shadow: -3px 1px 6px 0px rgba(0,0,0,0.1);
+  z-index: 2;
 }
 
 </style>

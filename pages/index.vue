@@ -76,10 +76,10 @@ export default {
       assetList: [],
       filterOptions: [ 'Most recent', 'Most popular', 'Cost - lower', 'Cost - higher'],
       filterCriteria: 'Most recent',
-      categoryOptions: this.$store.state.categories,
+      categoryOptions: this.$store.state.items.categories,
       categoryFilter: '',
       updateItems: 0,
-      userLoggedIn: this.$store.getters.isLoggedIn,
+      userLoggedIn: this.$store.getters['auth/isLoggedIn'],
       currentPage: 0
     }
   },
@@ -135,7 +135,12 @@ export default {
             // Make changes is user is logged in
             '$store.getters.isLoggedIn': function() {
             }
-        }
+        },
+  computed: {
+    /*userLoggedIn () {
+      return this.$store.getters['auth/isLoggedIn']
+    }*/
+  }
 }
 </script>
 
