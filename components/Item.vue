@@ -48,7 +48,7 @@
 </template>
 
 <script>
-//import api from '@/api'
+import api from '@/api'
 
     export default {
         name: 'Item',
@@ -59,7 +59,7 @@
         }),
         methods: {
             async itemClicked() {
-                //await api().put('/items/incrementClicks', { _id: this.item._id})
+                await api().put('/items/incrementClicks', { _id: this.item._id})
                 // window.location.href = this.item.affiliateLink
                 window.open(this.item.affiliateLink)
                 //console.log('Item clicked')
