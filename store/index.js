@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 
 import Auth from './auth'
+import Items from './items'
 
 
 new Vuex.Store({
@@ -29,11 +30,15 @@ new Vuex.Store({
           'girl'
       ]
   }),
+  getters: {
+    categoriesList: () => state.categories
+  },
   mutations: {
   },
   actions: {
   },
   modules: {
-    Auth
+    Auth,
+    Items
   }
 })
