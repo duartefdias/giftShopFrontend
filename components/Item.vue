@@ -68,10 +68,10 @@ import api from '@/api'
     }
 </script>
 
-<style>
+<style scoped>
 
     .item-cards {
-        background-color: rgba(235, 232, 232, 0.699);
+        background-color: #edebeb;
     }
 
 </style>
