@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row align="center" justify="center">
-            <v-img src="@/assets/exit.png" max-width="150"></v-img>
+            <v-img :src="require('~/assets/exit.png')" max-width="150"></v-img>
         </v-row>
         <v-row align="center" justify="center">
             <span>You have logged out.</span> 

@@ -1,7 +1,7 @@
 <template>
     <v-container @click="itemClicked()" min-height="400px" min-width="300px">
         <v-row justify="center">
-            <v-card hover height="400px" width="291px" class="item-cards" style="background-color: #D3E3FC;">
+            <v-card hover height="400px" width="291px" class="item-cards">
                 <v-img
                 class="white--text align-end"
                 height="200px"
@@ -69,5 +69,9 @@ import api from '@/api'
 </script>
 
 <style>
+
+    .item-cards {
+        background-color: rgba(235, 232, 232, 0.699);
+    }
 
 </style>
