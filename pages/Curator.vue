@@ -193,7 +193,7 @@ export default {
     var currentContext = this
     setTimeout(function () {
       currentContext.getNextProducts()
-    }, 2000)
+    }, 1000)
   },
   watch: {
     // Get more products after a few swipes
