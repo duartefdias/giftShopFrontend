@@ -34,5 +34,11 @@
   },
   "LazyVuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "DetectPrefixes": {
+    "description": "Auto imported from components/sliderComponents/detect-prefixes.js"
+  },
+  "LazyDetectPrefixes": {
+    "description": "Auto imported from components/sliderComponents/detect-prefixes.js"
   }
 }
