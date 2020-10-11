@@ -21,7 +21,7 @@
 <script>
 import Item from '@/components/Item'
 
-import detectPrefixes from '../sliderComponents/detect-prefixes.js'
+import detectPrefixes from './sliderComponents/detect-prefixes.js'
 export default {
   components: {
     Item
