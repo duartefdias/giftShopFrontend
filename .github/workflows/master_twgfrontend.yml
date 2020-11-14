@@ -33,3 +33,18 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_d22a6259f6b648a98af1f41201611335 }}
         package: .
+        
+    - name: Azure service principal login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    # Do other steps
+        
+    - name: Purge CDN
+      run:
+        az cdn endpoint purge -n ${{ secrets.AZURE_CDN_ENDPOINT }} --profile-name ${{ secrets.AZURE_CDN_PROFILE_NAME }} --content-paths "/*" --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --no-wait
+        
+    - name: Azure service principal logout
+      run: |
+        az logout
