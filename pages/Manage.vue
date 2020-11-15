@@ -242,7 +242,8 @@ export default {
 
     async deleteItem(itemId) {
       if(confirm('Delete item?')){
-        await api().delete('/items/',
+        console.log("Item to be deleted: " + itemId)
+        await api().delete('/items/' + itemId,
         {
           headers: {
             Authorization: this.$store.state.auth.token

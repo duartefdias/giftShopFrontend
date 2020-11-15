@@ -2,10 +2,15 @@
     <v-container @click="itemClicked()" min-height="400px" min-width="300px">
         <v-row justify="center">
             <v-card hover height="400px" width="291px" class="item-cards">
-                <v-img
+                <v-img v-if="item.imageURL"
                 class="white--text align-end"
                 height="200px"
                 v-bind:src="item.imageURL"
+                />
+                <v-img v-else
+                class="white--text align-end"
+                height="200px"
+                v-bind:src="'https://twgmedia.blob.core.windows.net/thumbnails/' + item._id"
                 />
 
                 <!--<v-card-subtitle class="pb-0">
