@@ -3,6 +3,9 @@ node_modules
 /dist
 .nuxt
 
+# ignore api.js file to prevent using localhost:3000 as backend
+api.js
+
 # local env files
 .env.local
 .env.*.local

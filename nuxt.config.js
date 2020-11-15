@@ -2,6 +2,13 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   /*
+  Change port and host
+  https://nuxtjs.org/faq/host-port/#configure-in-nuxtconfigjs
+  */ 
+ server: {
+   port: 8080
+ },
+  /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */

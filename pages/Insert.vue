@@ -74,6 +74,17 @@
             </v-col>
         </v-row>
 
+        <v-row>
+            <v-col cols="12" sm="6" md="3">
+                <v-file-input
+                v-model="assetImage"
+                show-size
+                accept="image/*"
+                truncate-length="15"
+                ></v-file-input>
+            </v-col>
+        </v-row>
+
         <v-btn @click="submit()">Insert item</v-btn>
 
         <v-row>
@@ -111,16 +122,29 @@ export default {
             price: '',
             clicks: 0
         },
+        assetImage: null
   }),
-  methods: {
-      async submit() {
-          await api().post('/items/insert', this.newAsset, {
-              headers: {
-                  Authorization: this.$store.state.auth.token
-              }
-          })
-          alert('Item inserted!')
-      }
+    methods: {
+        async submit() {
+            const formData = new FormData()
+            console.log(this.newAsset.image)
+            for ( let key in this.newAsset ) {
+                formData.append(key, this.newAsset[key]);
+            }
+            formData.append("assetImage", this.assetImage, this.assetImage.name)
+
+            for (var key of formData.entries()) {
+                    console.log(key[0] + ', ' + key[1]);
+                }
+
+            await api().post('/items/insert', /*this.newAsset*/formData, {
+                headers: {
+                    Authorization: this.$store.state.auth.token,
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            alert('Item inserted!')
+        },   
   },
   created() {
       this.categories = [
