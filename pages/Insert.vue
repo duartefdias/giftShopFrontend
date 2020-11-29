@@ -122,7 +122,8 @@ export default {
             price: '',
             clicks: 0
         },
-        assetImage: null
+        assetImage: null,
+        previewImageUrl: ''
   }),
     methods: {
         async submit() {
@@ -146,6 +147,11 @@ export default {
             alert('Item inserted!')
         },   
   },
+    watch: {
+        assetImage: function(val){
+            this.newAsset.imageURL = URL.createObjectURL(this.assetImage)
+        }
+    },
   created() {
       this.categories = [
                 'tech',
