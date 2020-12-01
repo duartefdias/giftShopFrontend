@@ -63,7 +63,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/sitemap'
   ],
 
   axios: {
@@ -104,6 +105,16 @@ export default {
         }
 
       // ....
+    }
+  },
+  sitemap: {
+    hostname: "https://thatweirdgift.com",
+    gzip: true,
+    exclude: [],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lasmod: new Date()
     }
   }
 }
