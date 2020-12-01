@@ -24,7 +24,10 @@ jobs:
       run: |
         npm install
         npm run build --if-present
+        cd .nuxt
+        echo "If the dist folder is present it means the npm run build was successfull"
         ls -lisa
+        cd ..
         npm run test --if-present
 
     - name: 'Deploy to Azure Web App'
