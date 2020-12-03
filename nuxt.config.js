@@ -6,8 +6,8 @@ export default {
   https://nuxtjs.org/faq/host-port/#configure-in-nuxtconfigjs
   */ 
  server: {
-  host: '0.0.0.0'
-   //port: 8080
+  host: '0.0.0.0',
+  port: process.env.PORT
  },
   /*
   ** Nuxt rendering mode
@@ -63,7 +63,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/sitemap'
   ],
 
   axios: {
@@ -104,6 +105,16 @@ export default {
         }
 
       // ....
+    }
+  },
+  sitemap: {
+    hostname: "https://thatweirdgift.com",
+    gzip: true,
+    exclude: [],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lasmod: new Date()
     }
   }
 }
