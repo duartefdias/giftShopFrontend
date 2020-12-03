@@ -6,8 +6,8 @@ export default {
   https://nuxtjs.org/faq/host-port/#configure-in-nuxtconfigjs
   */ 
  server: {
-  host: '0.0.0.0'
-   //port: 8080
+  host: '0.0.0.0',
+  port: process.env.PORT
  },
   /*
   ** Nuxt rendering mode
